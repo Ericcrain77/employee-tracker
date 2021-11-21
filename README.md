@@ -1,6 +1,6 @@
 # Employee Tracker
 
-GitHub Repository: https://github.com/Ericcrain77/note-taker
+GitHub Repository: https://github.com/Ericcrain77/employee-tracker
 
 ## Table of Contents
 * [Description](#description)
