@@ -29,7 +29,7 @@ class tracker {
         inquirer.prompt({
             type: 'list',
             message: 'What would you like to do?',
-            name: 'selection',
+            name: 'action',
             choices: [
                 'View All Departments',
                 'View All Roles',
@@ -40,12 +40,17 @@ class tracker {
                 'Update Employee Role',
             ]
         })
-            .then(choice => this.selectOption(choice.action))
+            .then(choice => {
+                console.log(choice.action);
+                return this.selectOption(choice.action);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
     viewAllDept() {
-        return `SELECT department.name AS department, department.id
-        FROM department`,
+        cTable.getTable({id:'*', name:'*'});
 
         this.start();
     };
@@ -86,7 +91,7 @@ class tracker {
                 return `INSTERT INTO department SET ?`
             })
             .catch(err => {
-                return err;
+                console.log(err);
             });
                 
         this.start();
@@ -138,7 +143,7 @@ class tracker {
                 return `INSTERT INTO role SET ?`
             })
             .catch(err => {
-                return err;
+                console.log(err);
             });
 
         this.start();
@@ -189,7 +194,7 @@ class tracker {
                 return `INSTERT INTO employee SET ?`
             })
             .catch(err => {
-                return err;
+                console.log(err);
             });
 
         this.start();
@@ -213,23 +218,24 @@ class tracker {
         });
     };
 
-    selectOption(choice) {
-        if (choice = 1) {
-            viewAllDept();
-        } else if (choice = 2) {
-            viewAllRoles();
-        } else if (choice = 3) {
-            viewAllEmployees();
-        } else if (choice = 4) {
-            addDept();
-        } else if (choice = 5) {
-            addRole();
-        } else if (choice = 6) {
-            addEmployee();
-        } else if (choice = 7) {
-            updateEmployeeRole();
+    selectOption(action) {
+        if (action == 'View All Departments') {
+            console.log('butts');
+            this.viewAllDept();
+        } else if (action == 'View All Roles') {
+            this.viewAllRoles();
+        } else if (action == 'View All Employees') {
+            this.viewAllEmployees();
+        } else if (action == 'Add A Department') {
+            this.addDept();
+        } else if (action == 'Add A Role') {
+            this.addRole();
+        } else if (action == 'Add Employee') {
+            this.addEmployee();
+        } else if (action == 'Update Employee Role') {
+            this.updateEmployeeRole();
         } else {
-            console.log(err)
+            console.log('Nope')
         }
     };
 };
