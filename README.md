@@ -15,6 +15,7 @@ Employee Tracker utilizes the following NPM Packages:
 * Inquirer.JS - Ables the user to interact with tables via the command-line
 * MySQL2 - Ables the user to connect with the database and perform queries
 * console.table - prints the MySQL2 rows to the console
+* dotenv - protects user's username and password
 
 In order to run the application, in the command line type "node server.js"
 
