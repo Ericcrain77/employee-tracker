@@ -1,19 +1,8 @@
 const inquirer = require('inquirer');
-const mysql = require('mysql2');
 const cTable = require('console.table');
+const dbcon = require('./db/connection');
 
 const PORT = process.env.PORT || 3001;
-
-require('dotenv').config();
-
-const dbcon = mysql.createConnection(
-    {
-        host: 'localhost',
-        database: process.env.DB_NAME,
-        user: process.env.DB_USER,
-        password: process.env.DB_PW
-    }
-);
 
 dbcon.connect(err => {
     if (err) {
@@ -41,7 +30,6 @@ class tracker {
             ]
         })
             .then(choice => {
-                console.log(choice.action);
                 return this.selectOption(choice.action);
             })
             .catch(err => {
@@ -49,16 +37,39 @@ class tracker {
             });
     };
 
-    viewAllDept() {
-        cTable.getTable({id:'*', name:'*'});
+    // displayQuery(query) {
+    //     con.promise().query(query)
+    //     .then( ([rows,fields]) => {
+    //         // console log results
+    //         console.log(` ` + cTable.getTable(rows));
+    //         // return back to the tracker menu
+    //         this.start();
+    //     })
+    //     .catch(console.log)
+    // };
 
-        this.start();
+    viewAllDept() {
+        // const sql = `SELECT * FROM department`;
+
+        // dbcon.query(sql, (err, rows) => {
+        //     if(err){
+        //         console.log(err);
+        //     }
+        //     console.table(rows);
+        //     this.start();
+        // })
     };
 
     viewAllRoles() {
-        return `SELECT role.title AS role, department.name AS department, role.salary AS salary,`,
+        const sql = `SELECT * FROM role`;
 
-        this.start();
+        dbcon.query(sql, (err, rows) => {
+            if(err){
+                console.log(err);
+            }
+            console.table(rows);
+            this.start();
+        })
     };
 
     viewAllEmployees() {
@@ -88,13 +99,13 @@ class tracker {
             }
         ])
             .then((newDept) => {
-                return `INSTERT INTO department SET ?`
+                return `INSTERT INTO department SET ?`,
+
+                this.start();
             })
             .catch(err => {
                 console.log(err);
             });
-                
-        this.start();
     };
 
     addRole() {
@@ -140,13 +151,14 @@ class tracker {
             }
         ])
             .then((newDept) => {
-                return `INSTERT INTO role SET ?`
+                return `INSTERT INTO role SET ?`,
+
+                this.start();
             })
             .catch(err => {
                 console.log(err);
             });
 
-        this.start();
     };
 
     addEmployee() {
@@ -191,13 +203,14 @@ class tracker {
             }
         ])
             .then((newEmployee) => {
-                return `INSTERT INTO employee SET ?`
+                return `INSTERT INTO employee SET ?`,
+
+                this.start();
             })
             .catch(err => {
                 console.log(err);
             });
 
-        this.start();
     };
 
     updateEmployeeRole(updatedRole) {
@@ -220,7 +233,6 @@ class tracker {
 
     selectOption(action) {
         if (action == 'View All Departments') {
-            console.log('butts');
             this.viewAllDept();
         } else if (action == 'View All Roles') {
             this.viewAllRoles();
