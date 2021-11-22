@@ -42,26 +42,6 @@ class tracker {
         })
             .then(choice => this.selectOption(choice.action))
     };
-    
-    selectOption(choice) {
-        if (choice = 0) {
-            viewAllDept();
-        } else if (choice = 1) {
-            viewAllRoles();
-        } else if (choice = 2) {
-            viewAllEmployees();
-        } else if (choice = 3) {
-            addDept();
-        } else if (choice = 4) {
-            addRole();
-        } else if (choice = 5) {
-            addEmployee();
-        } else if (choice = 6) {
-            updateEmployeeRole();
-        } else {
-            console.log(err)
-        }
-    };
 
     viewAllDept() {
         return `SELECT department.name AS department, department.id
@@ -104,8 +84,11 @@ class tracker {
         ])
             .then((newDept) => {
                 return `INSTERT INTO department SET ?`
+            })
+            .catch(err => {
+                return err;
             });
-
+                
         this.start();
     };
 
@@ -153,6 +136,9 @@ class tracker {
         ])
             .then((newDept) => {
                 return `INSTERT INTO role SET ?`
+            })
+            .catch(err => {
+                return err;
             });
 
         this.start();
@@ -202,6 +188,9 @@ class tracker {
             .then((newEmployee) => {
                 return `INSTERT INTO employee SET ?`
             })
+            .catch(err => {
+                return err;
+            });
 
         this.start();
     };
@@ -222,5 +211,25 @@ class tracker {
 
             this.start();
         });
+    };
+
+    selectOption(choice) {
+        if (choice = 1) {
+            viewAllDept();
+        } else if (choice = 2) {
+            viewAllRoles();
+        } else if (choice = 3) {
+            viewAllEmployees();
+        } else if (choice = 4) {
+            addDept();
+        } else if (choice = 5) {
+            addRole();
+        } else if (choice = 6) {
+            addEmployee();
+        } else if (choice = 7) {
+            updateEmployeeRole();
+        } else {
+            console.log(err)
+        }
     };
 };

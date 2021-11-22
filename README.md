@@ -23,7 +23,7 @@ In order to run the application, in the command line type "node server.js"
 
 
 ## Screenshots
-
+![Initial Prompt](assets/images/Initial-Prompt.png "Initial Prompt")
 
 ## Questions
 Reach out to me using my [Github account](https://github.com/Ericcrain77) or my [email](ericcrain77@gmail.com).
