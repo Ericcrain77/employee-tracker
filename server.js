@@ -37,27 +37,27 @@ class tracker {
             });
     };
 
-    // displayQuery(query) {
-    //     con.promise().query(query)
-    //     .then( ([rows,fields]) => {
-    //         // console log results
-    //         console.log(` ` + cTable.getTable(rows));
-    //         // return back to the tracker menu
-    //         this.start();
-    //     })
-    //     .catch(console.log)
-    // };
+    displayQuery(query) {
+        con.query(query)
+        .then( ([rows,fields]) => {
+            // console log results
+            console.log(` ` + cTable.getTable(rows));
+            // return back to the tracker menu
+            this.start();
+        })
+        .catch(console.log)
+    };
 
     viewAllDept() {
-        // const sql = `SELECT * FROM department`;
+        const sql = `SELECT * FROM department`;
 
-        // dbcon.query(sql, (err, rows) => {
-        //     if(err){
-        //         console.log(err);
-        //     }
-        //     console.table(rows);
-        //     this.start();
-        // })
+        dbcon.query(sql, (err, rows) => {
+            if(err){
+                console.log(err);
+            }
+            console.table(rows);
+            this.start();
+        })
     };
 
     viewAllRoles() {
@@ -73,13 +73,15 @@ class tracker {
     };
 
     viewAllEmployees() {
-        return `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager 
-        FROM employee 
-        LEFT JOIN role on employee.role_id = role.id 
-        LEFT JOIN department on role.department_id = department.id 
-        LEFT JOIN employee manager on manager.id = employee.manager_id;`,
+        const sql = `SELECT * FROM employee`;
 
-        this.start();
+        dbcon.query(sql, (err, rows) => {
+            if(err){
+                console.log(err);
+            }
+            console.table(rows);
+            this.start();
+        })
     };
 
     addDept() {
@@ -90,6 +92,7 @@ class tracker {
                 message: 'What will the name of this department be?',
                 validate: deptName => {
                     if (deptName) {
+                        console.log(deptName);
                         return true;
                     } else {
                         console.log('Name Required');
@@ -99,9 +102,11 @@ class tracker {
             }
         ])
             .then((newDept) => {
-                return `INSTERT INTO department SET ?`,
-
-                this.start();
+                console.log(newDept.name);
+                dbcon.query('INSERT INTO department SET ?',
+                    [newDept.name], (err, results) => {
+                        console.log(results);
+                })
             })
             .catch(err => {
                 console.log(err);
