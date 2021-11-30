@@ -4,7 +4,6 @@ GitHub Repository: https://github.com/Ericcrain77/employee-tracker
 
 ## Table of Contents
 * [Description](#description)
-* [Tutorial](#tutorial)
 * [Screenshots](#Screenshots)
 * [Questions](#questions)
 
@@ -19,11 +18,19 @@ Employee Tracker utilizes the following NPM Packages:
 
 In order to run the application, in the command line type "node server.js"
 
-## Tutorial
-
 
 ## Screenshots
+Initial Prompt
 ![Initial Prompt](assets/images/Initial-Prompt.png "Initial Prompt")
+
+Departments
+![Departments](assets/images/Departments.png "Initial Prompt")
+
+Roles
+![Roles](assets/images/Roles.png "Initial Prompt")
+
+Employees
+![Employees](assets/images/Employees.png "Initial Prompt")
 
 ## Questions
 Reach out to me using my [Github account](https://github.com/Ericcrain77) or my [email](ericcrain77@gmail.com).
